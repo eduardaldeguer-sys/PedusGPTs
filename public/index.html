@@ -1,18 +1,50 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0f172a" />
   <title>PedusGPT</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+  <div class="bg-orb orb-3"></div>
 
-<h1>🤖 PedusGPT</h1>
+  <main class="app-shell">
+    <aside class="sidebar">
+      <div class="brand-card glass">
+        <div class="brand-mark">P</div>
+        <div>
+          <h1>PedusGPT</h1>
+          <p>Chat moderno con NVIDIA API</p>
+        </div>
+      </div>
 
-<div id="chat"></div>
+      <section class="sidebar-block glass">
+        <h2>Estado</h2>
+        <div class="status-row">
+          <span class="dot online" id="statusDot"></span>
+          <span id="statusText">Listo</span>
+        </div>
+        <p class="small-muted" id="healthText">Comprobando conexión...</p>
+      </section>
 
-<input id="input" placeholder="Escribe..." />
-<button onclick="send()">Enviar</button>
+      <section class="sidebar-block glass">
+        <h2>Modelo</h2>
+        <label class="field-label" for="modelSelect">Selecciona un modelo</label>
+        <select id="modelSelect" class="select">
+          <option value="deepseek-ai/deepseek-v3">DeepSeek V3</option>
+          <option value="qwen/qwen2.5-72b-instruct">Qwen 2.5 72B Instruct</option>
+          <option value="nvidia/nemotron-4-340b-instruct">Nemotron 4 340B Instruct</option>
+          <option value="meta/llama-3.3-70b-instruct">Llama 3.3 70B Instruct</option>
+        </select>
+      </section>
 
-<script src="app.js"></script>
-</body>
+      <section class="sidebar-block glass">
+        <h2>Prompt del sistema</h2>
 </html>
