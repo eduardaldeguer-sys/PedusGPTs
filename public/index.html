@@ -1,43 +1,4 @@
 <!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#0f172a" />
-  <title>PedusGPT</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <div class="bg-orb orb-1"></div>
-  <div class="bg-orb orb-2"></div>
-  <div class="bg-orb orb-3"></div>
-
-  <main class="app-shell">
-    <aside class="sidebar">
-      <div class="brand-card glass">
-        <div class="brand-mark">P</div>
-        <div>
-          <h1>PedusGPT</h1>
-          <p>Chat moderno con NVIDIA API</p>
-        </div>
-      </div>
-
-      <section class="sidebar-block glass">
-        <h2>Estado</h2>
-        <div class="status-row">
-          <span class="dot online" id="statusDot"></span>
-          <span id="statusText">Listo</span>
-        </div>
-        <p class="small-muted" id="healthText">Comprobando conexión...</p>
-      </section>
-
-      <section class="sidebar-block glass">
-        <h2>Modelo</h2>
-        <label class="field-label" for="modelSelect">Selecciona un modelo</label>
-        <select id="modelSelect" class="select">
           <option value="deepseek-ai/deepseek-v3">DeepSeek V3</option>
           <option value="qwen/qwen2.5-72b-instruct">Qwen 2.5 72B Instruct</option>
           <option value="nvidia/nemotron-4-340b-instruct">Nemotron 4 340B Instruct</option>
@@ -47,4 +8,67 @@
 
       <section class="sidebar-block glass">
         <h2>Prompt del sistema</h2>
+        <textarea id="systemPrompt" class="textarea" rows="7">Eres PedusGPT, un asistente útil, directo y elegante. Responde claro, sin rodeos, y en español. Si el usuario pide código, entrega código limpio y funcional.</textarea>
+      </section>
+
+      <section class="sidebar-block glass tips">
+        <h2>Atajos</h2>
+        <button class="chip" data-prompt="Explícame cómo desplegar esto en Render paso a paso.">Deploy</button>
+        <button class="chip" data-prompt="Hazme una interfaz de chat más profesional con mejor diseño.">UI</button>
+        <button class="chip" data-prompt="Corrige bugs comunes de una app Node + Express con frontend estático.">Debug</button>
+      </section>
+    </aside>
+
+    <section class="chat-panel glass">
+      <header class="chat-header">
+        <div>
+          <h2>Chat</h2>
+          <p>Escribe algo y PedusGPT responderá usando la API configurada en Render.</p>
+        </div>
+        <div class="header-actions">
+          <button id="themeToggle" class="icon-button" aria-label="Cambiar tema">☾</button>
+          <button id="clearChat" class="secondary-button">Limpiar</button>
+        </div>
+      </header>
+
+      <div class="chat-meta">
+        <span>Consejo: prueba mensajes cortos para verificar la API primero.</span>
+      </div>
+
+      <div id="chatLog" class="chat-log" aria-live="polite"></div>
+
+      <div class="composer glass-soft">
+        <div class="composer-top">
+          <button id="attachPreset" class="ghost-button">Usar saludo</button>
+          <span id="typingIndicator" class="typing-indicator hidden">PedusGPT está escribiendo…</span>
+        </div>
+
+        <div class="composer-row">
+          <textarea id="messageInput" rows="1" placeholder="Escribe tu mensaje..." maxlength="4000"></textarea>
+          <button id="sendButton" class="send-button">Enviar</button>
+        </div>
+
+        <div class="composer-footer">
+          <span id="charCount">0/4000</span>
+          <span id="hintText">Enter para enviar · Shift+Enter para nueva línea</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <template id="messageTemplate">
+    <article class="message">
+      <div class="avatar"></div>
+      <div class="bubble">
+        <div class="bubble-meta">
+          <span class="role"></span>
+          <span class="time"></span>
+        </div>
+        <div class="content"></div>
+      </div>
+    </article>
+  </template>
+
+  <script src="app.js"></script>
+</body>
 </html>
